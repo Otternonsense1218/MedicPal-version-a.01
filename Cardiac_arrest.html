@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedicPal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="toggle-container">
+        <span class ="toggle-label">Dark Mode</span>
+        <label class="switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+    
+    <h1>Cardiac Arrest Logger</h1>
+    <div class="timer-row">
+        <button id="startBtn">Start</button>
+        <button id="stopBtn">Stop</button>
+        <span id="timer">00:00:00</span>
+    </div>
+
+    <div class="section" id="airway">
+        <h2>Airway/Breathing</h2>
+        <div class="airway-device">
+            <label class ="airway-label">Airway Device:</label>
+            <button class="airway-btn" data-device="SGA">SGA</button>
+            <button class="airway-btn" data-device="ETT">ETT</button>
+        </div>
+    </div>
+
+    <div class="section" id="interventions">
+        <h2>Interventions</h2>
+        <div class="defib-row">
+            <label class="defib-label">Defibrillation:</label>
+            <button class="defib-btn" data-energy="200 J">200 J</button>
+            <button class="defib-btn" data-energy="300 J">300 J</button>
+            <button class="defib-btn" data-energy="360 J">360 J</button>
+        </div>
+    </div>
+
+    <div class="section" id="medications">
+        <h2>Medications</h2>
+        <div class = "epi-row">
+            <span class="med-label">Epinephrine:</span>
+            <button id="epiBtn">Admin</button>
+            <span id="epiCount"># of Epi's administered: 0</span>
+        </div>
+        <div class="amio-row">
+            <label class="amio-label">Amiodarone:</label>
+            <button class="amioBtn" data-amio ="300 mg">300 mg</button>
+            <button class="amioBtn" data-amio ="150 mg">150 mg</button>
+        </div>
+    </div>
+
+    <div class="section" id="eventLog">
+        <h2>Event Log</h2>
+        <ul id="logList"></ul>
+        <button id="clearLogBtn">Clear Log</button>
+        <button id="exportBtn">Export Log</button>
+    </div>
+
+    <!-- Summary Modal -->
+
+    <div id="summaryModal" class="modal">
+        <div class="modal-content">
+            <h2>Event Summary</h2>
+            <p id="summaryTimes"></p>
+            <ul id="summaryLog"></ul>
+            <button id="returnBtn">return home</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
+
