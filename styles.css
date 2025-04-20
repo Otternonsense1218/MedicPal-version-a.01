@@ -71,6 +71,7 @@ button:active {
     background-color: #104a9e;
 }
 
+
 /* Log list */
 #logList {
     list-style-type: none;
@@ -226,21 +227,10 @@ body.dark-mode .section h2 {
     color: #fff;
 }
 
-/* Defib rows */
-.defib-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
+/* Start ROSC TOD buttons */
 
-.defib-label {
-    font-weight: bold;
-    margin-right: 10px;
-    min-width: 120px;;
-}
 
-.defib-btn {
+#cprBtn {
     background-color: #ff4d4d;
     color: white;
     padding: 8px 16px;
@@ -251,18 +241,135 @@ body.dark-mode .section h2 {
     transition: background-color 0.2s ease;
 }
 
-.defib-btn:hover {
+#cprBtn:hover {
     background-color: #c00000;
 }
 
-body.dark-mode .defib-btn {
+#roscBtn {
+    background-color: #4dff4d;
+    color: rgb(0, 0, 0);
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+#cprStatus {
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 10px;
+    color: #ff4d4d;
+}
+
+body.dark-mode #cprStatus {
+    color: #bb4444;
+}
+
+ /* shared styles for text and buttons within each section */
+
+.btn-shared {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+ }
+
+.btn-shared:hover {
+    background-color: #c00000;
+ }
+
+body.dark-mode .btn-shared {
     background-color: #bb4444;
+ }
+
+body.dark-mode .btn-shared:hover {
+    background-color: #992222;    
 }
 
-body.dark-mode .defib-btn:hover {
-    background-color: #992222;
+/* shared row and label styles within each section */ 
+
+.row-shared {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
 }
 
+.label-shared {
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 120px;
+}
+
+/* Modal styles */
+
+#summaryModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* dark translucent overlay */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: white; /* Make text readable */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    height: 100%; width: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* dark translucent overlay */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: white; /* Make text readable */
+}
+
+.modal-content {
+    background-color: #1e1e1e; /* dark card background */
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 90%;
+    text-align: left;
+    color: white;
+}
+
+.modal input, 
+.modal select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 15px;
+    border: none;
+}
+
+#returnBtn {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+#returnBtn:hover {
+    background-color: #0056b3;
+}
+
+/* Timer styles */
 .timer-row {
     display: flex;
     justify-content: center;
@@ -287,155 +394,33 @@ body.dark-mode #timer {
     color: #87cefa;
 }
 
-/* Medication section */ 
-
-/* EPI */
-.epi-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.med-label {
-    font-weight: bold;
-    min-width: 100px;
-}
-
-#epiBtn {
-    background-color: #ff4d4d;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.2s ease;
-}
-
-#epiBtn:hover {
-    background-color: #c00000;
-}
-
-body.dark-mode #epiBtn {
-    background-color: #bb4444;
-}
-
-body.dark-mode #epiBtn:hover {
-    background-color: #992222;
-}
-
-/* Amio */
-.amio-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.amio-label {
-    font-weight: bold;
-    margin-right: 10px;
-    min-width: 120px;;
-}
-
-.amioBtn {
-    background-color: #ff4d4d;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.2s ease;
-}
-
-.amioBtn:hover {
-    background-color: #c00000;
-}
-
-body.dark-mode .amioBtn {
-    background-color: #bb4444;
-}
-
-body.dark-mode .amioBtn:hover {
-    background-color: #992222;
-}
-/* Airway section */
-.airway-device {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10pd;
-}
-
-.airway-label {
-    font-weight: bold;
-    margin-right: 10px;
-    min-width: 120px;;
-}
-
-.airway-btn {
-    background-color: #ff4d4d;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.2s ease;
-}
-
-.airway-btn:hover {
-    background-color: #c00000;
-}
-
-body.dark-mode .airway-btn {
-    background-color: #bb4444;
-}
-
-body.dark-mode .airway-btn:hover {
-    background-color: #992222;
-}
+/* archive styles */ 
 
 
-/* Modal styles */ 
-
-#summaryModal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* dark translucent overlay */
+body.archive-page {
+    display: block;
     justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    color: white; /* Make text readable */
+    align-items: top;
+    height: 100vh;
+    background: linear-gradient(to right, #2d89ef, #1b65c9);
+    color: rgb(0, 0, 0);
+    margin: 0; 
 }
 
-.modal-content {
-    background-color: #1e1e1e; /* dark card background */
-    padding: 2rem;
-    border-radius: 10px;
-    max-width: 600px;
-    width: 90%;
-    text-align: left;
+.archive-link {
+    display: block;
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #444;
     color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+
 }
 
-#returnBtn {
-    margin-top: 1.5rem;
-    padding: 0.75rem 1.5rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1rem;
+.archive-link:hover {
+    background-color: #2d89ef;
 }
 
-#returnBtn:hover {
-    background-color: #0056b3;
-}

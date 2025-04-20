@@ -10,9 +10,18 @@ const startBtn = document.getElementById("startBtn");
 const stopBtn = document.getElementById("stopBtn"); 
 const exportBtn = document.getElementById("exportBtn");
 const logList = document.getElementById("logList");
+const homeBtn = document.getElementById("homeBtn");
 const clearLogBtn = document.getElementById("clearLogBtn");
 const darkModeToggle = document.getElementById("darkModeToggle");
 const timerDisplay = document.getElementById("timer");
+const intubationModal = document.getElementById("intubationModal");
+const intubationForm = document.getElementById("intubationForm");
+const cprBtn = document.getElementById("cprBtn");
+const roscBtn = document.getElementById("roscBtn");
+const todBtn = document.getElementById("todBtn");
+const cprStatus = document.getElementById("cprStatus");
+
+
 
 // timer functions
 function formatTime(ms) {
@@ -35,6 +44,17 @@ function formatDuration(ms) {
     const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
     const seconds = String(totalSeconds % 60).padStart(2, '0');
     return `${hours}:${minutes}:${seconds}`;
+}
+
+// save session function
+function saveSessionLog(events) {
+    const sessions = JSON.parse(localStorage.getItem('sessions')) || [];
+    const newSession = {
+        timestamp: new Date().toLocaleString(),
+        events: events
+    };
+    sessions.push(newSession);
+    localStorage.setItem('sessions', JSON.stringify(sessions));
 }
 
 
@@ -85,7 +105,13 @@ exportBtn.addEventListener('click', () => {
 
 //Disable buttons until start button is clicked
 function setInterventionButtonsState(enabled) {
-    document.querySelectorAll('.defib-btn').forEach(btn => btn.disabled = !enabled);
+    const exceptions = ['startBtn', 'exportBtn', 'clearLogBtn', 'darkModeToggle', 'homeBtn'];
+
+    document.querySelectorAll('button').forEach(btn => {
+        if (!exceptions.includes(btn.id)) {
+            btn.disabled = !enabled;
+        }
+    })
 }
 
 //All the buttons
@@ -96,7 +122,7 @@ startBtn.addEventListener('click', () => {
     timerInterval = setInterval(updateTimer, 1000); // Update timer every second
     setInterventionButtonsState(true); // Enable buttons when event starts
     console.log('start button clicked');
-    logEvent("Event Started");
+    logEvent("Event Started.");
 });
 
 stopBtn.addEventListener('click', () => {
@@ -105,7 +131,7 @@ stopBtn.addEventListener('click', () => {
     isRunning = false;
     const endTime = new Date();
     const endTimestamp = endTime.toLocaleString();
-    logEvent(`Event Stopped at ${endTimestamp}`);
+    logEvent(`Event Stopped.`);
 
     clearInterval(timerInterval); // Stop the timer
 
@@ -118,8 +144,41 @@ stopBtn.addEventListener('click', () => {
     document.getElementById('summaryModal').style.display = "flex";
 });
 
+cprBtn.addEventListener('click', () => {
+    if (!isRunning) {
+        alert("Please start the event.");
+        return;
+    }
+    logEvent("CPR Started.");
+    console.log("CPR Started.");
+    cprStatus.textContent = "CPR Status: In Progress";
+});
+
+roscBtn.addEventListener('click', () => {
+    if (!isRunning) {
+        alert("Please start the event.");
+        return;
+    }
+    logEvent("ROSC Achieved.");
+    console.log("ROSC Achieved.");
+    cprStatus.textContent = "CPR Status: ROSC Achieved";
+    cprStatus.style.color = "green"; // Change color to green
+});
+
+todBtn.addEventListener('click', () => {
+    if (!isRunning) {
+        alert("Please start the event.");
+        return;
+    }
+    logEvent("Time of Death Declared.");
+    console.log("Time of Death Declared.");
+    cprStatus.textContent = "CPR Status: Time of Death: " + new Date().toLocaleString();
+    cprStatus.style.color = "red"; // Change color to red
+});
+
 //Modal Return button functionality
 document.getElementById("returnBtn").addEventListener('click', () => {
+    saveSessionLog(logs); // Save logs to session
     logs = []; // Clear logs
     localStorage.removeItem("eventLogs");
     window.location.href = "index.html"; // Redirect to the main page
@@ -141,6 +200,13 @@ clearLogBtn.addEventListener('click', () => {
     console.log('Logs cleared!');
 });
 
+homeBtn.addEventListener('click', () => {
+    logs = []; // Clear logs
+    console.log('home button clicked');
+    localStorage.removeItem("eventLogs");
+    window.location.href = "index.html"; // Redirect to the main page
+});
+
 
 function logEvent(message) {
     const timestamp = new Date().toLocaleString();
@@ -155,6 +221,32 @@ function addLogToUI(logEntry) {
     li.textContent = logEntry;
     logList.appendChild(li);
 }
+
+// Handle intubation for button click
+
+// Open modal
+openIntubationBtn.addEventListener('click', () => {
+    intubationModal.style.display = "flex";
+});
+
+//Handle intubation form submission
+
+intubationForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const tubeSize = document.getElementById("tubeSize").value;
+    const tubeDepth = document.getElementById("tubeDepth").value;
+    const confirmation = document.getElementById("confirmation").value;
+    const attempts = document.getElementById("attempts").value;
+
+    const logText = `Intubation: Tube Size: ${tubeSize}, Tube Depth: ${tubeDepth}, Confirmation: ${confirmation}, Attempts: ${attempts}`;
+    logEvent(logText);
+
+    // Close modal
+    intubationModal.style.display = "none";
+    // Reset form
+    intubationForm.reset();
+});
 
 
 
@@ -176,7 +268,16 @@ document.querySelectorAll('.airway-btn').forEach(button => {
     });
 });
 
+// Handle IV/IO access
+document.querySelectorAll('.access-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const ivAccess = button.getAttribute('data-access');
+        logEvent(`${ivAccess} access obtained.`);
+        console.log(`${ivAccess} access obtained.`);
+    });
+});
 
+// EPI Btn functionality
 document.addEventListener('DOMContentLoaded', () => {
     const epiBtn = document.getElementById("epiBtn");
     const epiCountDisplay = document.getElementById("epiCount");
@@ -206,3 +307,43 @@ document.querySelectorAll('.amioBtn').forEach(button => {
         console.log(`Amiodarone ${amioadmin} given`);
     });
 });
+
+// handles mag button's
+document.querySelectorAll('.magBtn').forEach(button => {
+    button.addEventListener('click', () => {
+        const magadmin = button.getAttribute('data-mag');
+        logEvent(`Magnesium ${magadmin} given.`);
+        console.log(`Magnesium ${magadmin} given`);
+    });
+});
+
+// handles narcan button
+narcanBtn.addEventListener('click', () => {
+    if (!isRunning) {
+        alert("Please start the event.");
+        return;
+    }
+    logEvent(`Narcan Administered.`);
+    console.log(`Narcan Administered.`);
+});
+
+// handles bicarb button
+bicarbBtn.addEventListener('click', () => {
+    if (!isRunning) {
+        alert("Please start the event.");
+        return;
+    }
+    logEvent(`Bicarb Administered.`);
+    console.log(`Bicarb Administered.`);
+});
+
+// handles Calcium button
+calciumBtn.addEventListener('click', () => {
+    if (!isRunning) {
+        alert("Please start the event.");
+        return;
+    }
+    logEvent(`Calcium Administered.`);
+    console.log(`Calcium Administered.`);
+});
+
