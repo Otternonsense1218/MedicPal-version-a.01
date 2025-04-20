@@ -1,4 +1,4 @@
-# MedicPal-version-a.01
+# MedicPal-version-a.02
 A simple event logging application for paramedics and medial professionals.
 
 This is my first application. But I have created a simple event logger.
