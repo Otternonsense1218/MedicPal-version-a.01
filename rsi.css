@@ -1,0 +1,137 @@
+/* RSI Checklist Styles */
+body {
+    display: block;
+    justify-content: center;
+    align-items: top;
+    min-height: 100vh;
+    background: linear-gradient(to right, #2d89ef, #1b65c9);
+    color: white;
+    margin: 0;
+    padding: 20px;
+}
+
+.rsi-container {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #f7f9fc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+body h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.columns {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.column {
+    flex: 1 1 calc(33% - 20px); /* 3 columns with equal spacing */
+    background-color: #e0e0e0;
+    padding: 20px;
+    border-radius: 12px;
+    color: #333;
+}
+
+.column h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    text-align: center;
+    font-style: italic;
+    color: #000000;
+}
+
+.task-container {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.task-container input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.task-container label {
+    display: block;
+    color: #333;
+    font-size: 16px;
+}
+
+.task-container ul {
+    margin: 0;
+    padding-left: 20px;
+    list-style-type: disc;
+    font-size: 14px;
+}
+.task-container ul li {
+    margin: 5px;
+}
+
+.task-container.completed {
+    background-color: #4caf50;
+    color: white;
+}
+
+.task-container.completed label span, .task-container.completed ul {
+    color: white;
+}
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #f0f0f0;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button:hover:enabled {
+    background-color: #e6e6e6;
+}
+
+/* Log list */
+#logList {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 30px;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+#logList li {
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+    font-family: monospace;
+    color: #444;
+}
+
+#logList li:last-child {
+    border-bottom: none;
+}

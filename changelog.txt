@@ -4,3 +4,7 @@ Added CPR, ROSC, TOD buttons.
 Added Intubation form
 Added medications 
 Added archive section
+
+4/24/2025
+Update and clean home page
+added RSI page w/ set up check list, medication dosing and calculations, event loging of med admin / procedure

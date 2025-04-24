@@ -28,7 +28,16 @@ body.front-page {
     margin-bottom: 30px;
 }
 
-.welcome-container button {
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center, left;
+    gap: 10px;
+    margin: 0 auto;
+}
+.button-container button {
+    justify-content: center;
     padding: 14px 28px;
     font-size: 18px;
     border: none;
@@ -40,7 +49,7 @@ body.front-page {
     transition: 0.3s;
 }
 
-.welcome-container button:hover {
+.button-container button:hover {
     background-color: #e6e6e6;
 }
 /* Cardiac arrest Title */
@@ -423,4 +432,8 @@ body.archive-page {
 .archive-link:hover {
     background-color: #2d89ef;
 }
+
+
+
+
 

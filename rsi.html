@@ -1,0 +1,107 @@
+<!-- rsi.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RSI Checklist</title>
+    <link rel="stylesheet" href="rsi.css">
+</head>
+<body>
+    <h1> RSI Checklist</h1>
+
+    <div class="columns">
+        <!-- set up -->
+        <div class="column">
+            <h2>RSI Set Up</h2>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="prep-laryngoscope">
+                <label for="prep-laryngoscope">Laryngoscope(s)</label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="prep-ett">
+                <label for="prep-ett">ETT(s) + Syringe</label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="prep-stylet">
+                <label for="prep-stylet">Bougie and/or Stylet</label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="prep-suction">
+                <label for="prep-suction">Suction</label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="prep-etco2">
+                <label for="prep-etco2">ETCO2 and/or Colormetric</label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="backup-airway">
+                <label for="backup-airway">
+                    <span>Backup Airways</span>
+                        <ul>
+                            <li>-Supraglottic</li>
+                            <li>-Surgical</li>
+                        </ul>
+                </label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="setup-meds">
+                <label for="setup-meds">
+                    <span>Medications:</span>
+                        <ul>
+                            <li>-Premedication</li>
+                            <li>-Induction</li>
+                            <li>-Paralytic</li>
+                            <li>-Post-Intubation</li>
+                            <li>-Fluids/Vasopressors</li>
+                        </ul>
+                </label>
+            </div>
+        </div>
+
+        <!-- Considerations -->
+        <div class="column">
+            <h2>Considerations</h2>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="hemodynamics">
+                <label for="hemodynamics">
+                    <span>Hemodynamics:</span>
+                        <ul>
+                            <li>-Risk for hypotension?</li>
+                            <li>-Shock index</li>
+                        </ul>
+                </label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="Oxygenation">
+                <label for="Oxygenation">
+                  <span>Oxygenation:</span>
+                    <ul>
+                        <li>-Risk for desaturation?</li>
+                        <li>-Set SPo2 Limit</li>
+                    </ul>
+                </label>
+            </div>
+        </div>
+
+        <!--Patient preparation -->
+        <div class ="column">
+            <h2>Patient Preparation</h2>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="preoxygenation">
+                <label for="preoxygenation">Preoxygenation</label>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="section" id="eventLog">
+        <h2>Event Log</h2>
+        <ul id="logList"></ul>
+        <button id="clearLogBtn">Clear Log</button>
+        <button id="exportLogBtn">Export Log</button>
+        <button id="homeBtn">Return Home</button>
+    </div>
+
+    <script src="rsi.js"></script>
+</body>
+</html>
