@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="rsi.css">
 </head>
 <body>
+    <div class="main-content">
     <h1> RSI Checklist</h1>
 
     <div class="columns">
@@ -81,6 +82,13 @@
                     </ul>
                 </label>
             </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="pH">
+                <label for="pH">Metabolic Considerations?</label>
+            </div>
+            <div class="task-container orange-box">
+                <label>Verbalize Airway Plan!</label>
+            </div>
         </div>
 
         <!--Patient preparation -->
@@ -88,10 +96,88 @@
             <h2>Patient Preparation</h2>
             <div class="task-container">
                 <input type="checkbox" class="task-checkbox" id="preoxygenation">
-                <label for="preoxygenation">Preoxygenation</label>
+                <label for="preoxygenation">Preoxygenation: NC @ 15 lpm + NRB/CPAP/BVM</label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="prep-hemodynamics">
+                <label for="prep-hemodynamics">
+                  <span>Hemodynamics:</span>
+                    <ul>
+                        <li>-IV Fluids</li>
+                        <li>-Vasopressors</li>
+                    </ul>
+                </label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="positioning">
+                <label for="positioning">
+                  <span>Positioning</span>
+                    <ul>
+                        <li>-Ear to sternal notch</li>
+                        <li>-Ramp</li>
+                        <li>-Open collar</li>
+                    </ul>
+                </label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="apneic-oxygenation">
+                <label for="apneic-oxygenation">Apneic Oxygenation</label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="monitoring">
+                <label for="monitoring">
+                  <span>Monitoring:</span>
+                    <ul>
+                        <li>-SPo2 (opposite of BP)</li>
+                        <li>-EKG</li>
+                        <li>-BP (cycle q 5 mins)</li>
+                        <li>-ETCO2</li>
+                    </ul>
+                </label>
             </div>
         </div>
 
+        <!-- Post intubation-->
+        <div class="column">
+            <h2>Post-Intubation</h2>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="confirm-placement">
+                <label for="confirm-placement">
+                    <span>Confirm Placement:
+                        <ul>
+                            <li>-Waveform ETCO2</li>
+                            <li>-Lung sounds</li>
+                            <li>-Epigastric sounds</li>
+                        </ul>
+                    </span>
+                </label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="secure-ett">
+                <label for="secure-ett">Secure ETT</label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="analgesia">
+                <label for="analgesia">Analgesia</label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="sedation">
+                <label for="sedation">Sedation</label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="post-paralysis">
+                <label for="post-paralysis">Consider Paralysis</label>
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="og-ng-tube">
+                <label for="og-ng-tube">OG/NG Tube</label>  
+            </div>
+            <div class="task-container">
+                <input type="checkbox" class="task-checkbox" id="post-reassess">
+                <label for="post-reassess">Reassess</label>  
+        </div>
+        
+    </div>
     </div>
 
     <div class="section" id="eventLog">

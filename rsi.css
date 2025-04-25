@@ -1,23 +1,19 @@
 /* RSI Checklist Styles */
 body {
-    display: block;
-    justify-content: center;
-    align-items: top;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
-    background: linear-gradient(to right, #2d89ef, #1b65c9);
-    color: white;
     margin: 0;
     padding: 20px;
+    background: linear-gradient(to right, #2d89ef, #1b65c9);
+    color: white;
 }
 
-.rsi-container {
-    text-align: center;
-    margin: 0 auto;
-    max-width: 900px;
-    padding: 20px;
-    border-radius: 12px;
-    background-color: #f7f9fc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;;
 }
 
 body h1 {
@@ -30,13 +26,14 @@ body h1 {
 
 .columns {
     display: flex;
+    flex: 1;
     flex-wrap: nowrap;
     justify-content: space-between;
     gap: 20px;
 }
 
 .column {
-    flex: 1 1 calc(33% - 20px); /* 3 columns with equal spacing */
+    flex: 1 1 calc(25% - 15px); /* 4 columns with equal spacing */
     background-color: #e0e0e0;
     padding: 20px;
     border-radius: 12px;
@@ -89,7 +86,7 @@ body h1 {
 }
 
 .task-container.completed label span, .task-container.completed ul {
-    color: white;
+    color: rgb(0, 0, 0);
 }
 button {
     margin-top: 20px;
@@ -116,7 +113,7 @@ button:hover:enabled {
 #logList {
     list-style-type: none;
     padding-left: 0;
-    margin-top: 30px;
+    margin-top: auto;
     max-height: 300px;
     overflow-y: auto;
     border: 1px solid #ddd;
@@ -134,4 +131,28 @@ button:hover:enabled {
 
 #logList li:last-child {
     border-bottom: none;
+}
+ #eventLog {
+    margin-top: auto;
+    padding-top: 30px;
+ }
+.completed-column {
+    background-color: #a5d6a7 !important;
+    transition: background-color 0.3s ease;
+}
+
+.orange-box {
+    background-color: orange;
+    padding: 25px;
+    border-radius: 5px;
+    margin: 5px 0;
+    font-weight: bold;
+    color: black;
+    border: 2px solid #cc8400;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.orange-box label {
+    display: block;
+    padding-left: 0;
 }

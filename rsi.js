@@ -3,7 +3,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const taskCheckboxes = document.querySelectorAll(".task-checkbox");
     const logList = document.getElementById("logList");
-    const clearlogBtn = document.getElementById("clearlogBtn");
+    const clearLogBtn = document.getElementById("clearLogBtn");
     const exportLogBtn = document.getElementById("exportLogBtn");
     const homeBtn = document.getElementById("homeBtn");
 
@@ -16,6 +16,33 @@ document.addEventListener("DOMContentLoaded", () => {
         logList.scrollTop = logList.scrollHeight; // Scroll to the latest entry
     }
 
+    //Highlight columns green if all checkboxes are checked
+    function updateColumnHighlighting() {
+        const columns = document.querySelectorAll(".column");
+    
+        columns.forEach(column => {
+            const checkboxes = column.querySelectorAll('.task-checkbox');
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+    
+            const wasCompleted = column.classList.contains('completed-column');
+            const columnTitleElem = column.querySelector("h3, h2, .columntitle");
+            const columnTitle = columnTitleElem ? columnTitleElem.textContent.trim() : "Unnamed Column";
+    
+            if (allChecked && checkboxes.length > 0) {
+                if (!wasCompleted) {
+                    column.classList.add('completed-column');
+                    logEvent(`${columnTitle} completed.`);
+                }
+            } else {
+                if (wasCompleted) {
+                    column.classList.remove('completed-column');
+                    logEvent(`${columnTitle} uncompleted.`);
+                }
+            }
+        });
+    }
+    
+
     // task checkbox toggle
     taskCheckboxes.forEach((checkbox) => {
         checkbox.addEventListener("change", (event) => {
@@ -24,14 +51,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (checkbox.checked) {
                 taskContainer.classList.add("completed");
-                logEvent(`Completed: ${label.textContent.trim()}`);
+                updateColumnHighlighting();
              } else {
                     taskContainer.classList.remove("completed");
-                    logEvent(`Uncompleted: ${label.textContent.trim()}`);
+                    updateColumnHighlighting();
                 }
             });
-        });
     });
+    
 
     //Clear event log
     clearLogBtn.addEventListener("click", () => {
@@ -58,4 +85,4 @@ document.addEventListener("DOMContentLoaded", () => {
     homeBtn.addEventListener("click", () => {
         window.location.href = "index.html"; // Redirect to the home page
     });
-
+});
