@@ -132,10 +132,12 @@ button:hover:enabled {
 #logList li:last-child {
     border-bottom: none;
 }
- #eventLog {
+
+#eventLog {
     margin-top: auto;
     padding-top: 30px;
- }
+}
+
 .completed-column {
     background-color: #a5d6a7 !important;
     transition: background-color 0.3s ease;
@@ -155,4 +157,69 @@ button:hover:enabled {
 .orange-box label {
     display: block;
     padding-left: 0;
+}
+
+.calcSection {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-top: 20px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.calcSection h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    text-align: left;
+    font-style: italic;
+    color: #000000;
+}
+
+.row-shared input[type="number"] {
+    width: auto;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.shockIndex {
+    font-size: 1.5rem;
+    display: flex;
+    text-align: center;
+    gap: 0.5rem;
+    padding: 0.25rem;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+    color: #333;
+}
+
+.shockIndex.red {
+    background-color: rgba(255, 0, 0, 0.2);
+    color: red;
+    animation: flash 1s infinite alternate;
+}
+
+@keyframes flash {
+    from {
+        opacity: 1;
+    } to {
+        opacity: 0.5;
+    }
+    
+}
+
+.shockIndex input {
+    width: 50px;
+    padding: 0.2rem;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.output {
+    min-width: 120px;
+    text-align: center;
 }

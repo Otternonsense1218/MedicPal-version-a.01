@@ -179,7 +179,25 @@
         
     </div>
     </div>
+    <!--Calculation Section-->
+    <div class="calcSection">
+        <h2>Calculations:</h2>
+        <div class = "row-shared">
+            <input type="number" id="age" placeholder="Age (years)">
+            <input type="number" id="weight-lbs" placeholder="Weight (lbs)">
+            <input type="number" id="weight-kg" placeholder="Weight (kg)">
+        </div> 
+        <div class="shockIndex" id="shockIndexContainer">
+            <span>Shock Index: </span>
+            <input id="shockIndexHR" type="number" placeholder="HR" maxlength="3" />
+            <span>/</span>
+            <input id="shockIndexSBP" type="number" placeholder="SBP" maxlength="3" />
+            <span> = </span>
+            <span id="output" class="output">Enter HR and SBP</span>
+        </div> 
+    </div>
 
+    <!--Event Log-->
     <div class="section" id="eventLog">
         <h2>Event Log</h2>
         <ul id="logList"></ul>

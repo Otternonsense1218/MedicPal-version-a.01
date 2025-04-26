@@ -58,6 +58,100 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
     });
+
+    //Shock index
+    const hrInput = document.getElementById("shockIndexHR");
+    const sbpInput = document.getElementById("shockIndexSBP");
+    const output = document.getElementById("output");
+    const container = document.getElementById("shockIndexContainer");
+
+    function calculateShockIndex() {
+        const hr = parseFloat(hrInput.value);
+        const sbp = parseFloat(sbpInput.value);
+
+        let warningMessage = document.getElementById("hypotensionWarning");
+
+        if (!warningMessage) {
+            warningMessage = document.createElement("span");
+            warningMessage.id = "hypotensionWarning";
+            warningMessage.style.color = "red";
+            warningMessage.style.marginLeft = "10px";
+            container.appendChild(warningMessage);
+        }
+
+        if (!isNaN(hr) && !isNaN(sbp) && sbp > 0) {
+            const shockIndex = (hr / sbp).toFixed(2);
+            output.textContent = shockIndex;
+
+            if (shockIndex > 0.8) {
+                container.classList.add('red');
+                warningMessage.textContent = "HIGH RISK FOR HYPOTENSION";
+                
+            } else {
+                container.classList.remove('red');
+                warningMessage.textContent = "";
+            }
+        } else {
+            output.textContent = "Enter HR and SBP";
+            container.classList.remove('red');
+            if (warningMessage) {
+                warningMessage.textContent = "";
+            }
+        }
+    }
+
+    //enforces max and min length for hr and sbp 
+    sbpInput.addEventListener("input", () => {
+        const sbpValue = sbpInput.value;
+
+        //ensures SBP is at least 2 digits
+        if(sbpValue.length > 0 && sbpValue.length < 2) {
+            sbpInput.setCustomValidity("SBP must be at least 2 digits. If not you have other problems to attend too.....")
+            sbpInput.reportValidity();
+        } else {
+            sbpInput.setCustomValidity("");
+        }
+
+    });
+
+    //Enforces max length in JavaScript as a backup for browsers that ignore maxLength
+    hrInput.addEventListener("input", () => {
+        if(hrInput.value.length > 3){
+            hrInput.value = hrInput.value.slice(0, 3);
+        }
+    });
+
+    sbpInput.addEventListener("input", () => {
+        if(sbpInput.value.length > 3){
+            sbpInput.value = sbpInput.value.slice(0, 3);
+        }
+    });
+
+    //add blur event to hr and sbp inputs. will only create a log entry once the user has finished typing and leaves the input field
+    hrInput.addEventListener("blur", () => {
+        const hr = parseFloat(hrInput.value);
+        const sbp = parseFloat(sbpInput.value);
+
+        if (!isNaN(hr) && !isNaN(sbp) && sbp > 0) {
+            const shockIndex = (hr / sbp).toFixed(2);
+            logEvent(`Shock Index calculated: ${shockIndex}`)
+        }
+
+    });
+
+    sbpInput.addEventListener("blur", () => {
+        const hr = parseFloat(hrInput.value);
+        const sbp = parseFloat(sbpInput.value);
+
+        if (!isNaN(hr) && !isNaN(sbp) && sbp > 0) {
+            const shockIndex = (hr / sbp).toFixed(2);
+            logEvent(`Shock Index calculated: ${shockIndex}`)
+        }
+
+    });
+
+    hrInput.addEventListener("input", calculateShockIndex);
+    sbpInput.addEventListener("input", calculateShockIndex);
     
 
     //Clear event log
