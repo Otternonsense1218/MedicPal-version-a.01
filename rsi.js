@@ -152,6 +152,117 @@ document.addEventListener("DOMContentLoaded", () => {
 
     hrInput.addEventListener("input", calculateShockIndex);
     sbpInput.addEventListener("input", calculateShockIndex);
+
+    const weightKgInput = document.getElementById("weight-kg");
+    const weightLbsInput = document.getElementById("weight-lbs");
+
+    weightKgInput.addEventListener("input", () => {
+        const kg = parseFloat(weightKgInput.value);
+        if (!isNaN(kg)) {
+            weightLbsInput.value = (kg * 2.20462).toFixed(1);
+        } else {
+            weightLbsInput.value = "";
+        }
+        updateTable();
+    });
+
+    weightLbsInput.addEventListener("input", () => {
+        const lbs = parseFloat(weightLbsInput.value);
+        if (!isNaN(lbs)) {
+            weightKgInput.value = (lbs / 2.20462).toFixed(1);
+        } else {
+            weightKgInput.value = "";
+        }
+        updateTable();
+    });
+
+    const medications = [
+
+        //pre medication
+        {section: "Premedication", background: "bg-premedication", meds: [{name: "Fentanyl", doseMin: 1, doseMax: 3, unit: "mcg", basis: "IBW"}, ]},
+        
+        //Induction
+        {section: "Induction", background: "bg-induction", meds: [{name: "Etomidate", doseMin: 0.3, doseMax: 0.3, unit: "mg", basis: "ABW"}, ]},
+        {section: "Induction", background: "bg-induction", meds: [{name: "Ketamine", doseMin: 1.5, doseMax: 2, unit: "mg", basis: "IBW"}, ]},
+        {section: "Induction", background: "bg-induction", meds: [{name: "Midazolam", doseMin: 0.1, doseMax: 0.3, unit: "mg", basis: "ABW"}, ]},
+        {section: "Induction", background: "bg-induction", meds: [{name: "Propofol", doseMin: 1, doseMax: 2.5, unit: "mg", basis: "ABW"}, ]},
+        
+        //Paralysis
+        {section: "Paralysis", background: "bg-paralysis", meds: [{name: "Rocuronium", doseMin: 0.6, doseMax: 1.2, unit: "mg", basis: "IBW"}, ]},
+        {section: "Paralysis", background: "bg-paralysis", meds: [{name: "Vecuronium", doseMin: 0.15, doseMax: 0.25, unit: "mg", basis: "IBW"}, ]},
+        {section: "Paralysis", background: "bg-paralysis", meds: [{name: "Succinylcholine", doseMin: 1.5, doseMax: 1.5, unit: "mg", basis: "ABW"}, ]},
+
+        //Post Intubation
+        {section: "Post Intubation", background: "bg-postIntubation", meds: [{name: "Midazolam", doseMin: 0.05, doseMax: 0.1, unit: "mg", basis: "ABW"}, ]},
+        
+        //Vassopressor
+        {section: "Vasopressor", background: "bg-vasopressor", meds: [{name: "Epinephrine", doseMin: 5, doseMax: 20, unit: "mcg", basis: "ABW"}, ]},
+        {section: "Vasopressor", background: "bg-vasopressor", meds: [{name: "Levophed", doseMin: 0.05, doseMax: 0.4, unit: "mcg", basis: "ABW"}, ]},
+
+    ];
+
+    const table = document.getElementById("medTable");
+    const inputs = {
+        age: document.getElementById("age"),
+        sex: document.getElementById("ptSex"),
+        height: document.getElementById("height"),
+        weight: document.getElementById("weight-kg"),
+    };
+
+    function calculateIBW(sex, height) {
+        if (sex === "male") {
+            return 50 + 2.3 * (height - 60);
+        } else if (sex === "female") {
+            return 45.5 + 2.3 * (height - 60);
+        }
+        return null;
+    }
+
+    function updateTable() {
+        table.innerHTML = "";
+        const abw = parseFloat(inputs.weight.value) || 0;
+        const height = parseFloat(inputs.height.value) || 0;
+        const sex = inputs.sex.value;
+        const ibw = calculateIBW(sex, height) || 0;
+
+        medications.forEach(group => {
+            group.meds.forEach((med, idx) => {
+              const weightUsed = med.basis === "IBW" ? ibw : abw;
+              let calcMin = med.doseMin * weightUsed;
+              let calcMax = med.doseMax * weightUsed;
+              let unit = med.unit;
+
+              if (unit === "mcg" && (calcMin >= 1000 || calcMax >= 1000)) {
+                calcMin = calcMin / 1000;
+                calcMax = calcMax / 1000;
+                unit = "mg";
+              }
+
+              const calcMinFixed = calcMin.toFixed(1);
+              const calcMaxFixed = calcMax.toFixed(1);
+              const doseDisplay = (calcMinFixed === calcMaxFixed) ? `${med.doseMin} ${med.unit}/kg` : `${calcMinFixed} - ${calcMaxFixed} ${unit}/kg`;
+              const doseRangeDisplay = (med.doseMin === med.doseMax) ? `${med.doseMin} ${med.unit}/kg` : `${med.doseMin}-${med.doseMax} ${med.unit}/kg`;
+
+              const tr = document.createElement("tr");
+              tr.className = group.background;
+        
+              tr.innerHTML = `
+                <td>${idx === 0 ? group.section : ""}</td>
+                <td>${med.name}</td>
+                <td>${doseRangeDisplay}</td>
+                <td>${med.basis}</td>
+                <td class="font-bold">${doseDisplay}</td>
+              `;
+              table.appendChild(tr);
+            });
+        });
+    }
+    
+    Object.values(inputs).forEach(input => {
+        input.addEventListener("input", updateTable);
+    });
+
+    updateTable();
     
 
     //Clear event log

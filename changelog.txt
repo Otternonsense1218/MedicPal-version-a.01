@@ -8,3 +8,7 @@ Added archive section
 4/24/2025
 Update and clean home page
 added RSI page w/ set up check list, medication dosing and calculations, event loging of med admin / procedure
+
+4/20/25
+added shock index calculator
+added RSI med calcs 

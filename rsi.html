@@ -182,11 +182,21 @@
     <!--Calculation Section-->
     <div class="calcSection">
         <h2>Calculations:</h2>
+
+        <!--Pt info input section-->
         <div class = "row-shared">
-            <input type="number" id="age" placeholder="Age (years)">
+            <span id="ptInfo">Patient Information: </span>
+            <input type="number" id="age" placeholder="Age (yrs)">
+            <input type="number" id="height" placeholder="Height (in)">
+            <select id="ptSex" name="ptSex" placeholder="Pt Sex">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
             <input type="number" id="weight-lbs" placeholder="Weight (lbs)">
             <input type="number" id="weight-kg" placeholder="Weight (kg)">
         </div> 
+
+        <!--Shock Index calculation-->
         <div class="shockIndex" id="shockIndexContainer">
             <span>Shock Index: </span>
             <input id="shockIndexHR" type="number" placeholder="HR" maxlength="3" />
@@ -195,6 +205,24 @@
             <span> = </span>
             <span id="output" class="output">Enter HR and SBP</span>
         </div> 
+
+        <!--Medication Table-->
+        <div class="tableWrapper">
+            <table class="medTable">
+                <thead class="tableHead">
+                    <tr>
+                        <th>Section</th>
+                        <th>Medication</th>
+                        <th>Dose range</th>
+                        <th>Weight Basis</th>
+                        <th>Calculated Dose</th>
+                    </tr>
+                </thead>
+                <tbody id="medTable">
+                    <!-- Rows populated dynamically -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!--Event Log-->

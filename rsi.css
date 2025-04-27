@@ -178,12 +178,26 @@ button:hover:enabled {
 }
 
 .row-shared input[type="number"] {
+    width: 100px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.calcSection select {
     width: auto;
     padding: 8px;
     border-radius: 8px;
     border: 1px solid #ccc;
     margin-bottom: 10px;
     font-size: 16px;
+}
+
+.row-shared span[id="ptInfo"] {
+        font-size: 1.5rem;
+        color: black;
 }
 
 .shockIndex {
@@ -222,4 +236,62 @@ button:hover:enabled {
 .output {
     min-width: 120px;
     text-align: center;
+}
+
+/* calSection Med table */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.medTable {
+    width: 100%;
+    background-color: #1f2937;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    border-spacing: 0;
+    
+}
+
+.tableHead {
+    background-color: #374151;
+}
+
+.tableHead {
+    padding: 1rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Background for med table sections */
+.bg-premedication {
+    background-color: rgba(99, 102,241, 0.2);
+}
+
+.bg-induction {
+    background-color: rgba(34, 197, 94, 0.2);
+}
+
+.bg-paralysis {
+    background-color: rgba(59, 130, 246, 0.2);
+}
+
+.bg-postintubation {
+    background-color: rgba(168, 85, 247, 0.2);
+}
+
+.bg-vasopressor {
+    background-color: rgba(239, 68, 68, 0.2);
+}
+
+
+/* Table cell padding */
+.medTable td {
+    padding: 0.75rem;
+    vertical-align: middle;
+}
+
+/* highlight calculated dose */
+.med-table td.font-bold {
+    font-weight: bold;
 }
