@@ -279,6 +279,19 @@ body.dark-mode .btn-shared:hover {
     background-color: #992222;    
 }
 
+/* fixes button layout on smaller screens */
+
+.cardiac-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+@media (min-width: 800px) {
+    .cardiac-layout {
+        flex-direction: row;
+    }
+}
 /* shared row and label styles within each section */ 
 
 .row-shared {
