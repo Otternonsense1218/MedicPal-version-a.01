@@ -279,32 +279,48 @@ body.dark-mode .btn-shared:hover {
     background-color: #992222;    
 }
 
-/* fixes button layout on smaller screens */
-
-.cardiac-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-@media (min-width: 800px) {
-    .cardiac-layout {
-        flex-direction: row;
-    }
-}
 /* shared row and label styles within each section */ 
 
 .row-shared {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 10px;
     margin-top: 10px;
 }
 
+.row-shared button {
+    flex-grow: 1;
+    min-width: 120px;
+}
+
 .label-shared {
+    flex: 0 0 120px;
     font-weight: bold;
     margin-right: 10px;
     min-width: 120px;
+}
+
+/* Mobile tweaks */
+
+@media (max-width: 600px) {
+    .label-shared {
+        flex: 0 0 100%;
+        margin-bottom: 5px;
+    }
+
+    .row-shared {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .row-shared button {
+        width: 100%;
+    }
+
+    #timer {
+        font-size: 18px;
+    }
 }
 
 /* Modal styles */
