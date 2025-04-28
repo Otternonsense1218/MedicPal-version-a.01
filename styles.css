@@ -292,6 +292,7 @@ body.dark-mode .btn-shared:hover {
 .row-shared button {
     flex-grow: 1;
     min-width: 120px;
+    max-width: 1rem;
 }
 
 .label-shared {
