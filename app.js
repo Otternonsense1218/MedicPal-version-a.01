@@ -4,6 +4,10 @@ let logs = [];
 let timerInterval;
 let startTime = null;
 
+let pulseCheckInterval;
+let pulseCheckTimeLeft = 120;
+let pulseCheckRunning = false;
+
 
 
 const startBtn = document.getElementById("startBtn");
@@ -20,6 +24,8 @@ const cprBtn = document.getElementById("cprBtn");
 const roscBtn = document.getElementById("roscBtn");
 const todBtn = document.getElementById("todBtn");
 const cprStatus = document.getElementById("cprStatus");
+const pulseCheckDisplay = document.getElementById("pulseCheckDisplay");
+const pulseCheckButton = document.getElementById("pulseCheckDoneBtn");
 
 
 
@@ -132,6 +138,7 @@ stopBtn.addEventListener('click', () => {
     const endTime = new Date();
     const endTimestamp = endTime.toLocaleString();
     logEvent(`Event Stopped.`);
+    stopPulseCheckTimer();
 
     clearInterval(timerInterval); // Stop the timer
 
@@ -152,6 +159,7 @@ cprBtn.addEventListener('click', () => {
     logEvent("CPR Started.");
     console.log("CPR Started.");
     cprStatus.textContent = "CPR Status: In Progress";
+    startPulseCheckTimer();
 });
 
 roscBtn.addEventListener('click', () => {
@@ -163,9 +171,10 @@ roscBtn.addEventListener('click', () => {
     console.log("ROSC Achieved.");
     cprStatus.textContent = "CPR Status: ROSC Achieved";
     cprStatus.style.color = "green"; // Change color to green
+    stopPulseCheckTimer();
 });
 
-todBtn.addEventListener('click', () => {
+todBtn.addEventListener('click',  () => {
     if (!isRunning) {
         alert("Please start the event.");
         return;
@@ -174,6 +183,7 @@ todBtn.addEventListener('click', () => {
     console.log("Time of Death Declared.");
     cprStatus.textContent = "CPR Status: Time of Death: " + new Date().toLocaleString();
     cprStatus.style.color = "red"; // Change color to red
+    stopPulseCheckTimer();
 });
 
 //Modal Return button functionality
@@ -248,6 +258,24 @@ intubationForm.addEventListener('submit', function(e) {
     intubationForm.reset();
 });
 
+//function to provide a brief event logged message when buttons are pressed for feedback.
+
+function showFeedback(section) {
+    document.getElementById("airwayFeedback").classList.remove("show");
+    document.getElementById("interventionFeedback").classList.remove("show");
+    document.getElementById("medicationFeedback").classList.remove("show");
+
+    const feedbackId = section + "Feedback";
+    const feedbackDiv = document.getElementById(feedbackId);
+
+    if (feedbackDiv) {
+        feedbackDiv.classList.add("show");
+        setTimeout(() => {
+            feedbackDiv.classList.remove("show");
+        }, 1500); //hide again after 1.5 seconds
+    }
+}
+
 
 
 // Handle defibrillation button click
@@ -256,6 +284,7 @@ document.querySelectorAll('.defib-btn').forEach(button => {
         const energy = button.getAttribute('data-energy');
         logEvent(`Defibrillation: ${energy}`);
         console.log(`Defibrillation: ${energy}`);
+        showFeedback("intervention");
     });
 });
 
@@ -265,6 +294,7 @@ document.querySelectorAll('.airway-btn').forEach(button => {
         const airwayDevice = button.getAttribute('data-device');
         logEvent(`${airwayDevice} placed.`);
         console.log(`${airwayDevice} placed.`);
+        showFeedback("airway");
     });
 });
 
@@ -274,6 +304,7 @@ document.querySelectorAll('.access-btn').forEach(button => {
         const ivAccess = button.getAttribute('data-access');
         logEvent(`${ivAccess} access obtained.`);
         console.log(`${ivAccess} access obtained.`);
+        showFeedback("intervention");
     });
 });
 
@@ -293,6 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
             epiCount++;
             epiCountDisplay.textContent = `# of Epi administered: ${epiCount}`;
             logEvent(`Epinephrine Administered: ${epiCount}`);
+            showFeedback("medication");
         });
     } else {
         console.error('Epinephrine button or display element not found!');
@@ -305,6 +337,7 @@ document.querySelectorAll('.amioBtn').forEach(button => {
         const amioadmin = button.getAttribute('data-amio');
         logEvent(`Amiodarone ${amioadmin} given.`);
         console.log(`Amiodarone ${amioadmin} given`);
+        showFeedback("medication");
     });
 });
 
@@ -314,6 +347,7 @@ document.querySelectorAll('.magBtn').forEach(button => {
         const magadmin = button.getAttribute('data-mag');
         logEvent(`Magnesium ${magadmin} given.`);
         console.log(`Magnesium ${magadmin} given`);
+        showFeedback("medication");
     });
 });
 
@@ -325,6 +359,7 @@ narcanBtn.addEventListener('click', () => {
     }
     logEvent(`Narcan Administered.`);
     console.log(`Narcan Administered.`);
+    showFeedback("medication");
 });
 
 // handles bicarb button
@@ -335,6 +370,7 @@ bicarbBtn.addEventListener('click', () => {
     }
     logEvent(`Bicarb Administered.`);
     console.log(`Bicarb Administered.`);
+    showFeedback("medication");
 });
 
 // handles Calcium button
@@ -345,5 +381,54 @@ calciumBtn.addEventListener('click', () => {
     }
     logEvent(`Calcium Administered.`);
     console.log(`Calcium Administered.`);
+    showFeedback("medication");
 });
+
+//pulse check display and functions 
+
+function startPulseCheckTimer() {
+    clearInterval(pulseCheckInterval);
+    pulseCheckTimeLeft = 10;
+    pulseCheckRunning = true;
+    updatePulseCheckUI();
+
+    document.querySelector(".timer-row").classList.remove("flashing-border");
+
+    pulseCheckInterval = setInterval(() => {
+        pulseCheckTimeLeft--;
+        updatePulseCheckUI();
+
+        if (pulseCheckTimeLeft <= 0) {
+            clearInterval(pulseCheckInterval);
+            pulseCheckRunning = false;
+
+            const timerRow = document.querySelector(".timer-row");
+            timerRow.classList.add("flashing-border");
+
+            pulseCheckDisplay.innerHTML = '<span>PULSE CHECK:</span><button id="pulseCheckDoneBtn">Done</button>';
+            document.getElementById("pulseCheckDoneBtn").addEventListener("click", () => {
+                timerRow.classList.remove("flashing-border");
+                startPulseCheckTimer();
+            });
+        }
+    }, 1000);
+}
+
+function stopPulseCheckTimer() {
+    clearInterval(pulseCheckInterval);
+    pulseCheckRunning = false;
+    pulseCheckTimeLeft = 120;
+    pulseCheckDisplay.innerHTML = "";
+
+    document.querySelector(".timer-row").classList.remove("flashing-border");
+}
+
+function updatePulseCheckUI() {
+    const minutes = Math.floor(pulseCheckTimeLeft / 60);
+    const seconds = pulseCheckTimeLeft % 60;
+    pulseCheckDisplay.innerHTML = `
+        <span>PULSE CHECK</span>
+        <span>${minutes}:${seconds.toString().padStart(2, '0')}</span>
+    `;
+}
 

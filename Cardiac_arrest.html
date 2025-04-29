@@ -1,4 +1,4 @@
-<!DOCTYPE htm8l>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="toggle-container">
-        <span class ="toggle-label">Dark Mode</span>
+        <label class="toggle-label" for="darkModeToggle">Dark Mode</label>
         <label class="switch">
             <input type="checkbox" id="darkModeToggle">
             <span class="slider"></span>
@@ -20,6 +20,7 @@
         <button id="startBtn">Start</button>
         <button id="stopBtn">Stop</button>
         <span id="timer">00:00:00</span>
+        <div id="pulseCheckDisplay" class="pulse-check"></div>
     </div>
 
     <div class="cpr-row">
@@ -30,13 +31,17 @@
     </div>
     
     <div class="section" id="airway">
+        <div id="airwayFeedback" class="hidden">✔️ Event Logged!</div>
         <h2>Airway/Breathing</h2>
         <div class="row-shared">
+            
             <label class ="label-shared">Airway Device:</label>
             <button class="btn-shared airway-btn" data-device="SGA">SGA</button>
             <button class="btn-shared airway-btn" data-device="ETT">ETT</button>
             <button class="ettForm-btn" id="openIntubationBtn">Intubation Form</button>
+            
         </div>
+        
     </div>
 
     <div class="section" id="interventions">
@@ -52,6 +57,7 @@
             <button class="btn-shared access-btn" data-access="IV">IV</button>
             <button class="btn-shared access-btn" data-access="IO">IO</button>
         </div>
+        <div id="interventionFeedback" class="hidden">✔️ Event Logged!</div>
     </div>
 
     <div class="section" id="medications">
@@ -83,8 +89,10 @@
             <label class="label-shared">Narcan:</label>
             <button class="btn-shared" id="narcanBtn">Admin</button>
         </div>
-       
+        <div id="medicationFeedback" class="hidden">✔️ Event Logged!</div>
     </div>
+
+    
 
     <div class="section" id="eventLog">
         <h2>Event Log</h2>

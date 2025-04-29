@@ -1,3 +1,4 @@
+Version 1.0.0-alpha
 4/19/2025
 Updated Styles.css to include a shared theme for all buttons and text within each section. 
 Added CPR, ROSC, TOD buttons.
@@ -7,8 +8,24 @@ Added archive section
 
 4/24/2025
 Update and clean home page
-added RSI page w/ set up check list, medication dosing and calculations, event loging of med admin / procedure
+added RSI page w/ set up check list, medication dosing and calculations, event logging of med admin / procedure
 
 4/20/25
 added shock index calculator
 added RSI med calcs 
+deployment of pre-released web app. 
+Change to IBW calculation for more accurate med dosing (moved from Devine formula to the Miller formula)
+Fixed dark mode slider on the cardiac arrest page to stay at the top of the page and not move. 
+updated styling of the cardiac arrest page to change button layout on smaller screens and take away the weird formatting errors.
+added disclaimer modal to the home page.
+
+4/29/2025
+Added and Event Logged banner to each section of the cardiac arrest logger to provide feed back of successful button click.
+    Event logged banner is at the top of the airway section and bottom of the intervention section. Will keep like this for feed back following testing, then update it to it's final position.
+Changed start stop and timer section to stick to the top of the page so it is always visible even when the screen is scrolled. 
+Added pulse check timer along with flashing border to alert when 2 mins have elapsed. 
+
+
+
+
+

@@ -209,11 +209,12 @@ document.addEventListener("DOMContentLoaded", () => {
         weight: document.getElementById("weight-kg"),
     };
 
+    //uses the Miller formula for IBW calculations, changed from the devine formula
     function calculateIBW(sex, height) {
         if (sex === "male") {
-            return 50 + 2.3 * (height - 60);
+            return 56.2 + 1.41 * (height -60);
         } else if (sex === "female") {
-            return 45.5 + 2.3 * (height - 60);
+            return 53.1 + 1.36 * (height - 60);
         }
         return null;
     }

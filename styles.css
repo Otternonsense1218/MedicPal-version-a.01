@@ -3,7 +3,7 @@ body {
     font-family: 'segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f7f9fc;
     margin: 0;
-    padding: 10px;;
+    padding: 10px;
     color: #333;
     overflow-x: hidden;
 }
@@ -20,7 +20,7 @@ body.front-page {
 }
 
 .welcome-container {
-    text-align: center;;
+    text-align: center;
 }
 
 .welcome-container h1 {
@@ -32,7 +32,7 @@ body.front-page {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    align-items: center, left;
+    align-items: center;
     gap: 10px;
     margin: 0 auto;
 }
@@ -69,7 +69,7 @@ button {
     margin: 5px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.2s ease;;
+    transition: background-color 0.2s ease;
 }
 
 button:hover {
@@ -112,7 +112,7 @@ body.dark-mode #logList li {
 
 /* Positioning the switch in the top left */
 .toggle-container {
-    position: fixed;
+    position: absolute;
     top: 20px;
     right: 20px;
     z-index: 1000;
@@ -205,17 +205,17 @@ body.dark-mode .section {
     border-color: #444;
 }
 
-body.dark-mode .section {
-    background-color: #1c1c1c;
-    border-color: #444;
-}
-
 body.dark-mode .section h2 {
     color: #fff;
 }
 
 /* Start ROSC TOD buttons */
 
+.cpr-row {
+    padding: 1px;
+    margin: 1px auto;
+    max-width: 800px;
+}
 
 #cprBtn {
     background-color: #ff4d4d;
@@ -385,13 +385,75 @@ body.dark-mode .btn-shared:hover {
     background-color: #0056b3;
 }
 
+#disclaimerModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#acknowledgeBtn {
+    padding: 10px 20px;
+    background-color: #2d89ef;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#acknowledgeBtn:hover {
+    background-color: #1b65c9;
+}
+
 /* Timer styles */
 .timer-row {
-    display: flex;
+    background-color: white;
+    display:flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
     margin-bottom: 20px;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 3px solid transparent;
+    
+}
+
+.timer-row.flashing-border {
+    animation: flash-border 0.33s infinite;
+}
+
+@keyframes flash-border {
+    0% { border: 3px solid red; }
+    50% { border: 3px solid transparent; }
+    100% { border: 3px solid red; }
+}
+
+.pulse-check {
+    font-weight: bold;
+    color: red;
+    text-align: right;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 20px;
+}
+
+body.dark-mode .timer-row {
+    background-color: #121212;
+    box-shadow: 0 2px 5px rgba(41, 41, 41, 0.1);
 }
 
 #timer {
@@ -408,6 +470,28 @@ body.dark-mode .btn-shared:hover {
 body.dark-mode #timer {
     background-color: #222;
     color: #87cefa;
+}
+
+/*feedbackMessage for buttons */ 
+
+#airwayFeedback,
+#interventionFeedback,
+#medicationFeedback {
+    background-color: #4caf50;
+    color: white;
+    padding: 8px 16px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#airwayFeedback.show,
+#interventionFeedback.show,
+#medicationFeedback.show {
+    opacity: 1;
 }
 
 /* archive styles */ 
