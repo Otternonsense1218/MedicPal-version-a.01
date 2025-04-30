@@ -140,6 +140,7 @@ stopBtn.addEventListener('click', () => {
     logEvent(`Event Stopped.`);
     stopPulseCheckTimer();
     saveSessionLog(logs);
+    console.log("session saved");
 
     clearInterval(timerInterval); // Stop the timer
 
