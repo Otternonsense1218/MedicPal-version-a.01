@@ -427,7 +427,8 @@ body.dark-mode .btn-shared:hover {
 /* Timer styles */
 .timer-row {
     background-color: white;
-    display:flex;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 15px;
