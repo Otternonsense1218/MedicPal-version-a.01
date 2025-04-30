@@ -29,6 +29,7 @@ Added pulse check timer along with flashing border to alert when 2 mins have ela
 Updated timer row in the Cardiac Arrest logger to wrap on smaller screens so the pulse check timer and done button are laid out correctly
 Added a top banner to the Cardiac Arrest logger to keep the dark mode toggle laid out correctly. 
 removed the "unit/kg" on the calculated dose section of the RSI med calc chart to just "unit"
+Fixed archive bug where session event log wouldn't load
 
 
 
