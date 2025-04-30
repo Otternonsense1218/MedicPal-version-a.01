@@ -139,6 +139,7 @@ stopBtn.addEventListener('click', () => {
     const endTimestamp = endTime.toLocaleString();
     logEvent(`Event Stopped.`);
     stopPulseCheckTimer();
+    saveSessionLog(logs);
 
     clearInterval(timerInterval); // Stop the timer
 
@@ -188,7 +189,6 @@ todBtn.addEventListener('click',  () => {
 
 //Modal Return button functionality
 document.getElementById("returnBtn").addEventListener('click', () => {
-    saveSessionLog(logs); // Save logs to session
     logs = []; // Clear logs
     localStorage.removeItem("eventLogs");
     window.location.href = "index.html"; // Redirect to the main page

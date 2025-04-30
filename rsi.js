@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
               const calcMinFixed = calcMin.toFixed(1);
               const calcMaxFixed = calcMax.toFixed(1);
-              const doseDisplay = (calcMinFixed === calcMaxFixed) ? `${med.doseMin} ${med.unit}/kg` : `${calcMinFixed} - ${calcMaxFixed} ${unit}/kg`;
+              const doseDisplay = (calcMinFixed === calcMaxFixed) ? `${med.doseMin} ${med.unit}` : `${calcMinFixed} - ${calcMaxFixed} ${unit}`;
               const doseRangeDisplay = (med.doseMin === med.doseMax) ? `${med.doseMin} ${med.unit}/kg` : `${med.doseMin}-${med.doseMax} ${med.unit}/kg`;
 
               const tr = document.createElement("tr");
