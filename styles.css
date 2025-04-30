@@ -108,6 +108,17 @@ body.dark-mode #logList li {
     color: #a8a8a8;
 }
 
+.top-banner {
+    padding: 20px;
+    margin: 8px auto;
+    height: 15px;
+    background-color: #f7f9fc;
+}
+
+body.dark-mode .top-banner {
+    background-color: #121212;
+}
+
 /* Dark Mode slider switch */
 
 /* Positioning the switch in the top left */
